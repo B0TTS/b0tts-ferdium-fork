@@ -416,3 +416,13 @@ jobs:
           CSC_IDENTITY_AUTO_DISCOVERY: false
         run: pnpm build --publish always
         shell: bash
+      - name: Upload Windows installers as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ferdium-windows-${{ github.run_number }}
+          path: |
+            out/*.exe
+            out/*.blockmap
+            out/latest*.yml
+          if-no-files-found: error
+          retention-days: 30
